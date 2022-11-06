@@ -64,9 +64,10 @@ fn main() {
     stats.perfect_pairs = perfect_pairs.len() as i32;
 
     perfect_pairs.sort_by(|a, b| {
-        match a.len() > b.len() {
-            true => Ordering::Less,
-            false => Ordering::Greater
+        match (a.len() - b.len()) as i32 {
+            diff if diff < 0 => Ordering::Less,
+            diff if diff > 0 => Ordering::Greater,
+            _ => Ordering::Equal
         }
     });
 
